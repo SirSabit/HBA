@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using Microsoft.Extensions.Caching.Memory;
+using NSubstitute;
 using RatingService.Bll.Exceptions;
 using RatingService.Bll.Globals;
 using RatingService.Bll.Services.Abstracts;
@@ -13,6 +14,7 @@ namespace RatingService.Test.BllTesting
         private readonly RatingServices ratingServices;
         private readonly IUserServices userServicesMock;
         private readonly IProviderServices providerServicesMock;
+        private readonly IMemoryCache cacheMock;
         private static readonly int UserId = 1;
         private static readonly int ProviderId = 1;
         private static readonly int Point = 3;
@@ -21,7 +23,8 @@ namespace RatingService.Test.BllTesting
         {
             userServicesMock = Substitute.For<IUserServices>();
             providerServicesMock = Substitute.For<IProviderServices>();
-            ratingServices = new RatingServices(null, userServicesMock, providerServicesMock);
+            cacheMock =Substitute.For<IMemoryCache>();
+            ratingServices = new RatingServices(null, userServicesMock, providerServicesMock,cacheMock);
         }
 
         #region RateAsync Tests

@@ -7,10 +7,11 @@ namespace RatingService.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class RatingController(
-        IRatingServices ratingServices)
+        IRatingServices ratingServices,INotificationServices notificationServices)
         : ControllerBase
     {
         private readonly IRatingServices ratingServices = ratingServices;
+        private readonly INotificationServices notificationServices = notificationServices;
 
 
         /// <summary>
@@ -46,6 +47,21 @@ namespace RatingService.Api.Controllers
             {
                 var avarageRate = await ratingServices.AvarageAsync(providerId);
                 return Ok(avarageRate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        [HttpGet("{providerId}/notify")]
+        public async Task<IActionResult> Notify(int providerId)
+        {
+            try
+            {
+                var notifications = await notificationServices.GetProviderNotificationsAsync(providerId);
+
+                return Ok(notifications);
             }
             catch
             {

@@ -6,5 +6,6 @@
         public static string ProviderNotFound = "Provider not found!";
         public static string RatingsNotFound = "No ratings found for the provider!";
         public static string UserPointError = "User point must be between 0 and 5!";
+        public static string NoNewNotification = "There are no new notification for the provider";
     }
 }
