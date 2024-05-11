@@ -1,6 +1,23 @@
 version: '3.4'
 
 services:
+  service.database:
+    image: postgres:latest
+    container_name: service.database
+    environment:
+    - POSTGRES_DB=rating_db
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=123456 
+    volumes:
+    - ./.containers/rating_db-db:/var/lib/postgresql/data
+    ports:
+    - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   notificationservice.api:
     image: ${DOCKER_REGISTRY-}notificationserviceapi
     build:
@@ -15,14 +32,8 @@ services:
       dockerfile: RatıngService.Api/Dockerfile
     ports:
       - "6000:6000"
-  service.database:
-    image: postgres:latest
-    container_name: service.database
-    environment:
-    - POSTGRES_DB=rating_db
-    - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=123456 
-    volumes:
-    - ./.containers/rating_db-db:/var/lib/postgresql/data
-    ports:
-    - 5432:5432   
+    depends_on: 
+     service.database:
+      condition: service_healthy
+
+  
