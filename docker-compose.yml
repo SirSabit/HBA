@@ -8,8 +8,6 @@ services:
       dockerfile: NotificationService.Api/Dockerfile
     ports:
     - "5000:5000"
-    - "5001:5001"
-
   ratingservice.api:
     image: ${DOCKER_REGISTRY-}ratingserviceapi
     build:
@@ -17,7 +15,6 @@ services:
       dockerfile: RatıngService.Api/Dockerfile
     ports:
       - "6000:6000"
-      - "6001:6001"
   service.database:
     image: postgres:latest
     container_name: service.database
