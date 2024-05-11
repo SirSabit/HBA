@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RatingService.Api", "Ratın
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RatingService.Test", "RatingService.Test\RatingService.Test.csproj", "{5AE5715F-F2DA-4E18-A32C-3D8E8D6A2E25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationService.Api", "NotificationService.Api\NotificationService.Api.csproj", "{EC61EAB9-7A86-4231-8165-EB11710D5627}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationService.Api", "NotificationService.Api\NotificationService.Api.csproj", "{EC61EAB9-7A86-4231-8165-EB11710D5627}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{BB008DFB-F591-4220-90EC-D2F6A5E11D1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{EC61EAB9-7A86-4231-8165-EB11710D5627}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC61EAB9-7A86-4231-8165-EB11710D5627}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC61EAB9-7A86-4231-8165-EB11710D5627}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB008DFB-F591-4220-90EC-D2F6A5E11D1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB008DFB-F591-4220-90EC-D2F6A5E11D1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB008DFB-F591-4220-90EC-D2F6A5E11D1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB008DFB-F591-4220-90EC-D2F6A5E11D1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
