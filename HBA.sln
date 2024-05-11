@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RatingService.Dtos", "Ratin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RatingService.Api", "RatıngService.Api\RatingService.Api.csproj", "{7777E647-7BFE-4F78-BD40-8C217D551FAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RatingService.Test", "RatingService.Test\RatingService.Test.csproj", "{5AE5715F-F2DA-4E18-A32C-3D8E8D6A2E25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RatingService.Test", "RatingService.Test\RatingService.Test.csproj", "{5AE5715F-F2DA-4E18-A32C-3D8E8D6A2E25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationService.Api", "NotificationService.Api\NotificationService.Api.csproj", "{EC61EAB9-7A86-4231-8165-EB11710D5627}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{5AE5715F-F2DA-4E18-A32C-3D8E8D6A2E25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AE5715F-F2DA-4E18-A32C-3D8E8D6A2E25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AE5715F-F2DA-4E18-A32C-3D8E8D6A2E25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC61EAB9-7A86-4231-8165-EB11710D5627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC61EAB9-7A86-4231-8165-EB11710D5627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC61EAB9-7A86-4231-8165-EB11710D5627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC61EAB9-7A86-4231-8165-EB11710D5627}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
-using RatingService.Api.ExceptionHandlers;
-using RatingService.Bll.Extensions;
-using RatingService.Dal.Extensions;
+using NotificationService.Api.ExteptionManagement.Handlers;
+using NotificationService.Api.Services.Abstract;
+using NotificationService.Api.Services.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,30 +9,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddBllServices();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<INotificationServices, NotificationServices>();
 
-#region Exception Handling
-builder.Services.AddExceptionHandler<BadRequestExceptionHandler>();
-builder.Services.AddExceptionHandler<NotFoundExceptionHandler>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
-#endregion
-
-builder.Services.AddCors(options =>
-     options.AddDefaultPolicy(builder =>
-     builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
-
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.HandleMigration();
 
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseCors();
 app.UseExceptionHandler();
 app.UseHttpsRedirection();
 
