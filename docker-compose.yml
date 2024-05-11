@@ -31,7 +31,7 @@ services:
       context: .
       dockerfile: RatıngService.Api/Dockerfile
     ports:
-      - "6000:6000"
+    - "6000:6000"
     depends_on: 
      service.database:
       condition: service_healthy
