@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  notificationservice.api:
+    image: ${DOCKER_REGISTRY-}notificationserviceapi
+    build:
+      context: .
+      dockerfile: NotificationService.Api/Dockerfile
+    ports:
+    - "5000:5000"
+    - "5001:5001"
+
+  ratingservice.api:
+    image: ${DOCKER_REGISTRY-}ratingserviceapi
+    build:
+      context: .
+      dockerfile: RatıngService.Api/Dockerfile
+    ports:
+      - "6000:6000"
+      - "6001:6001"
+  service.database:
+    image: postgres:latest
+    container_name: service.database
+    environment:
+    - POSTGRES_DB=rating_db
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=123456 
+    volumes:
+    - ./.containers/rating_db-db:/var/lib/postgresql/data
+    ports:
+    - 5432:5432   
