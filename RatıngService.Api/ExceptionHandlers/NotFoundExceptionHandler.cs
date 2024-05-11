@@ -25,7 +25,7 @@ namespace RatingService.Api.ExceptionHandlers
 
             var problemDetails = new ProblemDetails
             {
-                Status = StatusCodes.Status404NotFound,
+                Status = StatusCodes.Status200OK,
                 Title = "Not Found",
                 Detail = notFoundException.Message
             };

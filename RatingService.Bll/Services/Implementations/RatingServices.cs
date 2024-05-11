@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using RatingService.Bll.Exceptions;
 using RatingService.Bll.Globals;
 using RatingService.Bll.Services.Abstracts;
@@ -11,14 +12,17 @@ namespace RatingService.Bll.Services.Implementations
     public class RatingServices(
         PostgreDbContext dbContext,
         IUserServices userServices,
-        IProviderServices providerServices) : IRatingServices
+        IProviderServices providerServices,
+        IMemoryCache memoryCache) : IRatingServices
     {
 
         #region fields        
         private readonly PostgreDbContext dbContext = dbContext;
         private readonly IUserServices userServices = userServices;
         private readonly IProviderServices providerServices = providerServices;
+        private readonly IMemoryCache memoryCache = memoryCache;
         #endregion
+
 
         public async Task<double> AvarageAsync(int providerId)
         {
@@ -57,7 +61,24 @@ namespace RatingService.Bll.Services.Implementations
                 CreatedAt = DateTime.UtcNow
             });
 
+            CacheNewRatings(rate);
+
             return await dbContext.SaveChangesAsync();
+        }
+
+        private void CacheNewRatings(RatingDto rate)
+        {
+            var cachedRates = new List<RatingDto>();
+
+            string key = $"{Constants.RatingCacheKey}{rate.ProviderId}";
+
+            memoryCache.TryGetValue(key, out cachedRates);
+
+            cachedRates = cachedRates ?? new List<RatingDto>();
+
+            cachedRates.Add(rate);
+
+            memoryCache.Set(key, cachedRates);
         }
     }
 }
