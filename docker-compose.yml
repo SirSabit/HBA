@@ -14,8 +14,8 @@ services:
     - 5432:5432
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
+      interval: 15s
+      timeout: 15s
       retries: 5
 
   notificationservice.api:
@@ -31,7 +31,7 @@ services:
       context: .
       dockerfile: RatıngService.Api/Dockerfile
     ports:
-    - "6000:6000"
+    - "5050:5050"
     depends_on: 
      service.database:
       condition: service_healthy

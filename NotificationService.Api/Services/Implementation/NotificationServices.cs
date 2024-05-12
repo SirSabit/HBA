@@ -14,7 +14,7 @@ namespace NotificationService.Api.Services.Implementation
             using (HttpClient client = new HttpClient())
             {
                 //TODO : relocate url
-                string url = $"https://localhost:7294/api/rating/{providerId}/notify";
+                string url = $"http://host.docker.internal:5050/api/rating/{providerId}/notify";
                 HttpResponseMessage response = await client.GetAsync(url);
                 string result = await response.Content.ReadAsStringAsync();
                 if (response.IsSuccessStatusCode)
