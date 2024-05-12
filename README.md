@@ -3,6 +3,7 @@
 This project contains two different API. RatingService.Api and NotificationService.Api. You can check the code for Unit testing, Error handling, General structure. 
 ##### Since there are little time left for NotificationService.Api I didn't write Unit Test for this API.  I am sorry for that :/
 
+### You can contact with me via email: bahadir.cengel@gmail.com
 ## Running the application
 There are docker-compose file inside solution. All you have to do is docker-compose up :) 
 # RatingService.Api
