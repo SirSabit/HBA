@@ -1,10 +1,4 @@
-﻿using NotificationService.Api.Models;
-using NotificationService.Api.Services.Abstract;
-using System.Text.Json;
-using System;
-using Microsoft.EntityFrameworkCore;
-using NotificationService.Api.ExceptionManagement.Exceptions;
-using Microsoft.AspNetCore.Connections;
+﻿using NotificationService.Api.Services.Abstract;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;

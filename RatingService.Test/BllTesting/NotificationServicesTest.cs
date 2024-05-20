@@ -3,13 +3,7 @@ using NSubstitute;
 using RatingService.Bll.Exceptions;
 using RatingService.Bll.Globals;
 using RatingService.Bll.Services.Abstracts;
-using RatingService.Bll.Services.Implementations;
 using RatingService.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RatingService.Test.BllTesting
 {
@@ -39,7 +33,7 @@ namespace RatingService.Test.BllTesting
             providerServicesMock.CheckProvider(providerId).Returns(false);
 
             //Act
-            var result = await Assert.ThrowsAsync<NotFoundException>(()=> notificationServices.GetProviderNotificationsAsync(providerId));
+            var result = await Assert.ThrowsAsync<NotFoundException>(() => notificationServices.GetProviderNotificationsAsync(providerId));
 
             //Assert
             Assert.Equal(ExceptionMessages.ProviderNotFound, result.Message);
@@ -52,7 +46,7 @@ namespace RatingService.Test.BllTesting
             int providerId = ProviderId;
             var data = new List<RatingDto>();
             providerServicesMock.CheckProvider(providerId).Returns(true);
-            cacheMock.TryGetValue(CahceKey,out data).Returns(false);
+            cacheMock.TryGetValue(CahceKey, out data).Returns(false);
             //Act
             var result = await Assert.ThrowsAsync<NotFoundException>(() => notificationServices.GetProviderNotificationsAsync(providerId));
 

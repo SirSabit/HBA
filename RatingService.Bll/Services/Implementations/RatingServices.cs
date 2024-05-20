@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
 using RatingService.Bll.Exceptions;
 using RatingService.Bll.Globals;
 using RatingService.Bll.Services.Abstracts;
@@ -72,7 +71,7 @@ namespace RatingService.Bll.Services.Implementations
             string message = $"Someone rated you!";
             await Task.Run(() =>
             {
-                notificationBroker.SendToQueue(message,providerId);
+                notificationBroker.SendToQueue(message, providerId);
             });
         }
     }

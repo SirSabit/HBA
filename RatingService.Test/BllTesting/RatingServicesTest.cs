@@ -23,8 +23,8 @@ namespace RatingService.Test.BllTesting
         {
             userServicesMock = Substitute.For<IUserServices>();
             providerServicesMock = Substitute.For<IProviderServices>();
-            cacheMock =Substitute.For<IMemoryCache>();
-            ratingServices = new RatingServices(null, userServicesMock, providerServicesMock,cacheMock);
+            cacheMock = Substitute.For<IMemoryCache>();
+            ratingServices = new RatingServices(null, userServicesMock, providerServicesMock, cacheMock);
         }
 
         #region RateAsync Tests

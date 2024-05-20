@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using NotificationService.Api.ExceptionManagement.Exceptions;
+﻿using Microsoft.AspNetCore.Mvc;
 using NotificationService.Api.Services.Abstract;
 
 namespace NotificationService.Api.Controllers

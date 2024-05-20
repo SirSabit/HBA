@@ -53,6 +53,6 @@ namespace RatingService.Api.Controllers
             }
         }
 
-      
+
     }
 }

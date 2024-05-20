@@ -1,6 +1,4 @@
-﻿using NotificationService.Api.Models;
-
-namespace NotificationService.Api.Services.Abstract
+﻿namespace NotificationService.Api.Services.Abstract
 {
     public interface INotificationServices
     {

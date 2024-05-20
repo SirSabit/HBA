@@ -1,11 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 using RatingService.Dal.MessageBrokers.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RatingService.Dal.MessageBrokers.Implementations
 {
