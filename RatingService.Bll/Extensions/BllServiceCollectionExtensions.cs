@@ -13,11 +13,9 @@ namespace RatingService.Bll.Extensions
         public static void AddBllServices(this IServiceCollection services)
         {
             services.AddDalServices();
-            services.AddMemoryCache();
             services.AddScoped<IRatingServices, RatingServices>();
             services.AddScoped<IUserServices, UserServices>();
             services.AddScoped<IProviderServices, ProviderServices>();
-            services.AddScoped<INotificationServices, NotificationServices>();
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
 using RatingService.Bll.Exceptions;
 using RatingService.Bll.Globals;
 using RatingService.Bll.Services.Abstracts;
 using RatingService.Dal.DbContexts;
+using RatingService.Dal.MessageBrokers.Abstract;
 using RatingService.Dtos;
 using RatingService.Entities;
 
@@ -13,14 +13,14 @@ namespace RatingService.Bll.Services.Implementations
         PostgreDbContext dbContext,
         IUserServices userServices,
         IProviderServices providerServices,
-        IMemoryCache memoryCache) : IRatingServices
+        INotificationBroker notificationBroker) : IRatingServices
     {
 
         #region fields        
         private readonly PostgreDbContext dbContext = dbContext;
         private readonly IUserServices userServices = userServices;
         private readonly IProviderServices providerServices = providerServices;
-        private readonly IMemoryCache memoryCache = memoryCache;
+        private readonly INotificationBroker notificationBroker = notificationBroker;
         #endregion
 
 
@@ -61,24 +61,18 @@ namespace RatingService.Bll.Services.Implementations
                 CreatedAt = DateTime.UtcNow
             });
 
-            CacheNewRatings(rate);
+            await NotifyProvider(rate.ProviderId);
 
             return await dbContext.SaveChangesAsync();
         }
 
-        private void CacheNewRatings(RatingDto rate)
+        private async Task NotifyProvider(int providerId)
         {
-            var cachedRates = new List<RatingDto>();
-
-            string key = $"{Constants.RatingCacheKey}{rate.ProviderId}";
-
-            memoryCache.TryGetValue(key, out cachedRates);
-
-            cachedRates = cachedRates ?? new List<RatingDto>();
-
-            cachedRates.Add(rate);
-
-            memoryCache.Set(key, cachedRates);
+            string message = $"Someone rated you!";
+            await Task.Run(() =>
+            {
+                notificationBroker.SendToQueue(message, providerId);
+            });
         }
     }
 }

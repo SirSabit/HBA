@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RatingService.Bll.Globals
+﻿namespace RatingService.Bll.Globals
 {
     public static class Constants
     {

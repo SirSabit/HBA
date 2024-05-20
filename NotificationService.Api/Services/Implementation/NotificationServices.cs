@@ -1,33 +1,47 @@
-﻿using NotificationService.Api.Models;
-using NotificationService.Api.Services.Abstract;
-using System.Text.Json;
-using System;
-using Microsoft.EntityFrameworkCore;
-using NotificationService.Api.ExceptionManagement.Exceptions;
+﻿using NotificationService.Api.Services.Abstract;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System.Text;
 
 namespace NotificationService.Api.Services.Implementation
 {
-    public class NotificationServices : INotificationServices
+    public class NotificationServices(IConfiguration configuration) : INotificationServices
     {
-        public async Task<List<RatingModel>> GetNotifications(int providerId)
+        private readonly IConfiguration configuration = configuration;
+
+        public List<string> GetNotifications(int providerId)
         {
-            using (HttpClient client = new HttpClient())
+            var response = new List<string>();
+
+            string queueName = $"{configuration["NotificationBroker:QueueName"]}-{providerId}";
+            var factory = new ConnectionFactory()
             {
-                //TODO : relocate url
-                string url = $"http://host.docker.internal:5050/api/rating/{providerId}/notify";
-                HttpResponseMessage response = await client.GetAsync(url);
-                string result = await response.Content.ReadAsStringAsync();
-                if (response.IsSuccessStatusCode)
+                HostName = $"{configuration["NotificationBroker:HostName"]}",
+                UserName = "guest",
+                Password = "guest",
+                Ssl = new SslOption()
                 {
-                    List<RatingModel>? data = JsonSerializer.Deserialize<List<RatingModel>>(result, new JsonSerializerOptions(JsonSerializerDefaults.Web));
-                    return data ?? new List<RatingModel>();
+                    Enabled = false,
+                    ServerName = $"{configuration["NotificationBroker:HostName"]}"
                 }
-                else
-                {
-                    ErrorModel? data = JsonSerializer.Deserialize<ErrorModel>(result, new JsonSerializerOptions(JsonSerializerDefaults.Web));
-                    throw new GlobalException(data?.Detail);
-                }
-            }
+            };
+            using var connection = factory.CreateConnection();
+            using var channel = connection.CreateModel();
+            var consumer = new EventingBasicConsumer(channel);
+
+            consumer.Received += (sender, args) =>
+            {
+                var body = args.Body.ToArray();
+                var message = Encoding.UTF8.GetString(body);
+                response.Add(message);
+            };
+
+            channel.BasicConsume(
+                queue: queueName,
+                autoAck: true,
+                consumer: consumer);
+
+            return response;
         }
     }
 }

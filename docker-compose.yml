@@ -17,7 +17,11 @@ services:
       interval: 15s
       timeout: 15s
       retries: 5
-
+  service.broker:
+    image: rabbitmq:3-management
+    ports:
+    - "5672:5672"
+    - "15672:15672"   
   notificationservice.api:
     image: ${DOCKER_REGISTRY-}notificationserviceapi
     build:

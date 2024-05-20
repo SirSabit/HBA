@@ -1,6 +1,6 @@
 ﻿namespace NotificationService.Api.ExceptionManagement.Exceptions
 {
-    public class GlobalException: Exception
+    public class GlobalException : Exception
     {
         public GlobalException() : base("Unhandled Error!")
         {
