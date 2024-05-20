@@ -12,11 +12,11 @@ namespace NotificationService.Api.Controllers
         private readonly INotificationServices notificationServices = notificationServices;
 
         [HttpGet("{providerId}")]
-        public async Task<IActionResult> GetNotifications(int providerId)
+        public IActionResult GetNotifications(int providerId)
         {
             try
             {
-                var notifications = await notificationServices.GetNotifications(providerId);
+                var notifications = notificationServices.GetNotifications(providerId);
                 return Ok(notifications);
             }
             catch
