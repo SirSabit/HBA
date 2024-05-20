@@ -17,8 +17,8 @@ namespace NotificationService.Api.Services.Implementation
             var factory = new ConnectionFactory()
             {
                 HostName = $"{configuration["NotificationBroker:HostName"]}",
-                UserName = "guest",
-                Password = "guest",
+                UserName = configuration["NotificationBroker:UserName"],
+                Password = configuration["NotificationBroker:Password"],
                 Ssl = new SslOption()
                 {
                     Enabled = false,
