@@ -8,8 +8,8 @@ This project contains two different API. RatingService.Api and NotificationServi
 ## Running the application
 There are docker-compose file inside solution. All you have to do is docker-compose up :) 
 # RatingService.Api
-This API is based on an N-Tier architecture. It has 3 endpoints. These endpoints are Rate, Avarage. 
-##NOTE: When a new rating has been posted, it also sends it to the queue of the provider. 
+This API is based on an N-Tier architecture. It has 2 endpoints. These endpoints are Rate, Avarage. 
+## NOTE: When a new rating has been posted, it also sends it to the queue of the provider. 
 
 ## General restrictions
 To be able to use these endpoints. You can use the users and providers that I seeded. 
