@@ -14,7 +14,17 @@ namespace NotificationService.Api.Services.Implementation
             var response = new List<string>();
 
             string queueName = $"{configuration["NotificationBroker:QueueName"]}-{providerId}";
-            var factory = new ConnectionFactory() { HostName = configuration["NotificationBroker:HostName"], UserName = configuration["NotificationBroker:UserName"], Password = configuration["NotificationBroker:Password"] };
+            var factory = new ConnectionFactory()
+            {
+                HostName = $"{configuration["NotificationBroker:HostName"]}",
+                UserName = "guest",
+                Password = "guest",
+                Ssl = new SslOption()
+                {
+                    Enabled = false,
+                    ServerName = $"{configuration["NotificationBroker:HostName"]}"
+                }
+            };
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
             var consumer = new EventingBasicConsumer(channel);

@@ -11,7 +11,17 @@ namespace RatingService.Dal.MessageBrokers.Implementations
 
         public Task SendToQueue(string notificationMessage, int providerId)
         {
-            var factory = new ConnectionFactory() { HostName = configuration["NotificationBroker:HostName"], UserName = configuration["NotificationBroker:UserName"], Password = configuration["NotificationBroker:Password"] };
+            var factory = new ConnectionFactory()
+            {
+                HostName = configuration["NotificationBroker:HostName"],
+                UserName = configuration["NotificationBroker:UserName"],
+                Password = configuration["NotificationBroker:Password"],
+                Ssl = new SslOption()
+                {
+                    Enabled = false,
+                    ServerName = $"{configuration["NotificationBroker:HostName"]}"
+                }
+            };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
